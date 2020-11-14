@@ -1,7 +1,23 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 
-const Alert = () => {
-  return <h2>alert component</h2>
-}
+const Alert = (props) => {
+	const { color, text, list, showAlert } = props;
 
-export default Alert
+	useEffect(
+		() => {
+			const timeout = setTimeout(() => {
+				showAlert();
+			}, 3000);
+			return () => clearTimeout(timeout);
+		},
+		[ list ]
+	);
+
+	return (
+		<div className="alert" style={{ backgroundColor: `${color}` }}>
+			<p>{text}</p>
+		</div>
+	);
+};
+
+export default Alert;
